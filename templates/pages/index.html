@@ -1,0 +1,126 @@
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+{% block title %}Portfolio{% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" crossorigin href="{% static '/bootstrap.min.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<!-- Blog 2 - Bootstrap Brain Component -->
+<section class="py-3 py-md-5 py-xl-8">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+          <h2 class="mb-4 display-5 text-center">Projects</h2>
+          <p class="text-secondary mb-5 text-center lead fs-4">Stay tuned and updated to my latest projects.</p>
+          <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
+        </div>
+      </div>
+    </div>
+  
+    <div class="container overflow-hidden">
+      <div class="row gy-5 gy-lg-0 gx-xxl-5">
+        {% for project in projects %}
+          <div class="col-12 col-lg-4">
+            <article>
+              <figure class="rounded overflow-hidden mb-3 bsb-overlay-hover">
+                <a href="{% url 'index-detail' pk=project.id %}">
+                  <img class="img-fluid bsb-scale bsb-hover-scale-up" loading="lazy" src="{{ project.image.url }}" alt="Business">
+                </a>
+              </figure>
+              <div class="entry-header mb-3">
+                <h2 class="entry-title h4 mb-0">
+                  <a class="link-dark text-decoration-none" href="{% url 'index-detail' pk=project.id %}">{{ project.title }}</a>
+                </h2>
+                <p>{{ project.description|truncatechars:50 }}</p>
+              </div>
+              <div class="entry-footer">
+                <ul class="entry-meta list-unstyled d-flex align-items-center mb-0">
+                  <li>
+                    <a class="fs-7 link-secondary text-decoration-none d-flex align-items-center" href="#!">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                        <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
+                        <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                      </svg>
+                      <span class="ms-2 fs-7">{{ project.created_at }}</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>{% endblock content %}
+
+{% block contact %}
+<section class="bg-light py-3 py-md-5">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+          <h2 class="mb-4 display-5 text-center">Contact</h2> 
+          <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row justify-content-lg-center">
+        <div class="col-12 col-lg-9">
+          <div class="bg-white border rounded shadow-sm overflow-hidden">
+
+            {% if form_success %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Message sent!</strong> Wait for me to check it out.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+
+            {% if form_error %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>Something went wrong!</strong> Please try again later.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+            
+            <form action="{% url "index" %}" method="POST">
+              {% csrf_token %}
+              <div class="row gy-4 gy-xl-5 p-4 p-xl-5">
+                <div class="col-12">
+                  <label for="fullname" class="form-label">Full Name <span class="text-danger">*</span></label>
+                  {{ form.full_name }}
+                </div>
+                <div class="col-12">
+                  <label for="fullname" class="form-label">Email <span class="text-danger">*</span></label>
+                  {{ form.email }}
+                </div>
+                <div class="col-12">
+                  <label for="fullname" class="form-label">Subject <span class="text-danger">*</span></label>
+                  {{ form.subject }}
+                </div>
+                <div class="col-12">
+                  <label for="message" class="form-label">Message <span class="text-danger">*</span></label>
+                  {{ form.message }}
+                </div>
+                <div class="col-12">
+                  <div class="d-grid">
+                    <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock contact %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static '/bootstrap.bundle.min.js' %}"></script>
+{% endblock extra_js %}

@@ -1,0 +1,67 @@
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+{% block title %}Contact Inquiries{% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" crossorigin href="{% static '/bootstrap.min.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+
+<!-- Table 2 - Bootstrap Brain Component -->
+<section class="py-3 py-md-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9 col-xl-8">
+        <div class="card widget-card border-light shadow-sm">
+          <div class="card-body p-4">
+            <h5 class="card-title widget-card-title mb-4">Contact Inquiries</h5>
+            <div class="table-responsive">
+              <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
+                <thead>
+                  <tr>
+                    <th>Email</th>
+                    <th>Full Name</th>
+                    <th>Subject</th>
+                    <th>Messages</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for contact in contacts %}
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div>
+                          <h6 class="m-0">{{ contact.email }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <h6 class="mb-1">{{ contact.full_name }}</h6>
+                    </td>
+                    <td>
+                      <h6 class="mb-1">{{ contact.subject }}</h6>
+                    </td>
+                    <td>
+                        {{ contact.message }}
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}
+
+{% block extra_js %}
+    <script type="text/javascript" href="{% static '/bootstrap.bundle.min.js' %}"></script>
+{% endblock extra_js %}
