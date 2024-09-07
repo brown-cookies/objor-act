@@ -6,11 +6,35 @@
 
 {% block extra_css %}
     <link rel="stylesheet" crossorigin href="{% static '/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/utilities/bsb-overlay/bsb-overlay.css">
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/utilities/bsb-btn-size/bsb-btn-size.css">
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/heroes/hero-6/assets/css/hero-6.css">
 {% endblock extra_css %}
 
 {% block content %}
-<!-- Blog 2 - Bootstrap Brain Component -->
-<section class="py-3 py-md-5 py-xl-8">
+<!-- Hero 6 - Bootstrap Brain Component -->
+<section class="py-4 py-md-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="container-fluid bsb-hero-6 bsb-overlay" style="--bsb-overlay-opacity: 0.5; --bsb-overlay-bg-color: var(--bs-light-rgb);">
+          <div class="row justify-content-md-center align-items-center">
+            <div class="col-12 col-md-11 col-xl-10">
+              <h2 class="display-1 text-center text-md-start text-shadow-head fw-bold mb-4">Hi, I'm Jesimiel Almedejar</h2>
+              <p class="lead text-center text-md-start text-shadow-body mb-5 d-flex justify-content-sm-center justify-content-md-start">
+                <span class="col-12 col-sm-10 col-md-8 col-xxl-7">A software Engineer Graduated from Holy Angel Univerity.</span>
+              </p>
+              <div class="d-grid gap-2 d-sm-flex justify-content-sm-center justify-content-md-start">
+                <a href="#project" class="btn bsb-btn-2xl btn-outline-dark">Projects</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="py-3 py-md-5 py-xl-8" id="project">
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
